@@ -21,8 +21,11 @@
  *  0  => true
  *  -5 => false
  */
-function isPositive(/* number */) {
-  throw new Error('Not implemented');
+function isPositive(number) {
+  if (Math.sign(number) === -1) {
+    return false;
+  }
+  return true;
 }
 
 /**
