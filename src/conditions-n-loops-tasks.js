@@ -303,8 +303,80 @@ function isContainNumber(num, digit) {
  */
 function getBalanceIndex(/* arr */) {
   throw new Error('Not implemented');
+  // console.log(arr);
+  // let leftPosition = 0;
+  // let rightPosition = arr.length - 1;
+  // let leftSum = 0;
+  // let rightSum = 0;
+  // if (arr[0] === arr[arr.length - 1] && arr.length === 3) {
+  //   return 1;
+  // }
+  // if (arr.length > 3) {
+  //   leftSum = arr[leftPosition];
+  //   rightSum = arr[rightPosition];
+  //   while (leftPosition < rightPosition) {
+  //     if (rightPosition - leftPosition > 2) {
+  //       if (leftSum === -rightSum) {
+  //         leftPosition += 1;
+  //         leftSum += arr[leftPosition];
+  //         rightPosition -= 1;
+  //         rightSum += arr[rightPosition];
+  //         console.log(leftPosition);
+  //         console.log(rightPosition);
+  //         console.log(leftSum);
+  //         console.log(rightSum);
+  //       }
+  //       if (leftSum > rightSum) {
+  //         rightPosition -= 1;
+  //         rightSum += arr[rightPosition];
+  //         console.log(leftPosition);
+  //         console.log(rightPosition);
+  //         console.log(leftSum);
+  //         console.log(rightSum);
+  //       }
+  //       if (leftSum < rightSum) {
+  //         leftPosition += 1;
+  //         leftSum += arr[leftPosition];
+  //         console.log(leftPosition);
+  //         console.log(rightPosition);
+  //         console.log(leftSum);
+  //         console.log(rightSum);
+  //       }
+  //     }
+  //     if (leftSum === rightSum && rightPosition - leftPosition === 2) {
+  //       console.log(leftPosition);
+  //       console.log(rightPosition);
+  //       console.log(leftSum);
+  //       console.log(rightSum);
+  //       console.log('result: ', leftPosition + 1);
+  //       return leftPosition + 1;
+  //     }
+  //     if (leftSum !== rightSum && rightPosition - leftPosition === 2) {
+  //       console.log(leftPosition);
+  //       console.log(rightPosition);
+  //       console.log(leftSum);
+  //       console.log(rightSum);
+  //       console.log('result: ', -1);
+  //       return -1;
+  //     }
+  //   }
+  // }
+  // console.log('result: ', -1);
+  // return -1;
 }
 
+// const array = [1, 2, 5, 3, 0]; // 2
+// const array = [2, 3, 9, 5]; // 2
+// const array = [1, 2, 3, 4, 5]; // -1
+// const array = [1, 1]; // -1
+// const array = [1, 2, 3, 4, 5, 6, 7, 8, 9] // -1
+// const array = [] // -1
+// const array = [-9, 0, -4, 8, -9, -1, 6, 7, -22]; // 6
+// const a = -9 + 0 - 4 + 8 - 9;
+// const b = -22;
+// console.log('leftSum: ', a);
+// console.log('rightSum: ', b);
+// getBalanceIndex(array);
 /**
  * Generates a spiral matrix of a given size, filled with numbers in ascending order starting from one.
  * The direction of filling with numbers is clockwise.
@@ -326,8 +398,45 @@ function getBalanceIndex(/* arr */) {
  *          [10, 9,  8,  7]
  *        ]
  */
-function getSpiralMatrix(/* size */) {
-  throw new Error('Not implemented');
+function getSpiralMatrix(size) {
+  const result = [];
+
+  for (let i = 0; i < size; i += 1) {
+    result[i] = [];
+  }
+
+  let xStart = 0;
+  let xEnd = size - 1;
+  let yStart = 0;
+  let yEnd = size - 1;
+  let num = 1;
+
+  while (xStart <= xEnd && yStart <= yEnd) {
+    for (let i = xStart; i < xEnd; i += 1) {
+      result[xStart][i] = num;
+      num += 1;
+    }
+    xStart += 1;
+
+    for (let i = yStart; i <= yEnd; i += 1) {
+      result[i][yEnd] = num;
+      num += 1;
+    }
+    yEnd -= 1;
+
+    for (let i = yEnd; i >= yStart; i -= 1) {
+      result[xEnd][i] = num;
+      num += 1;
+    }
+    xEnd -= 1;
+
+    for (let i = yEnd; i > yStart; i -= 1) {
+      result[i][yStart] = num;
+      num += 1;
+    }
+    yStart += 1;
+  }
+  return result;
 }
 
 /**
