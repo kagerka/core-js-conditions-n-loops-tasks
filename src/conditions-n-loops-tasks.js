@@ -489,40 +489,41 @@ function rotateMatrix(matrix) {
  *  [-2, 9, 5, -3]  => [-3, -2, 5, 9]
  */
 
-function sortByAsc(arr) {
-  if (arr.length < 2) {
-    return arr;
-  }
+function sortByAsc(/* arr */) {
+  throw new Error('Not implemented');
+  // if (arr.length < 2) {
+  //   return arr;
+  // }
 
-  let left = [];
-  let right = [];
-  left = arr.slice(0, arr.length / 2);
-  right = arr.slice(arr.length / 2);
+  // let left = [];
+  // let right = [];
+  // left = arr.slice(0, arr.length / 2);
+  // right = arr.slice(arr.length / 2);
 
-  function sort(leftArr, rightArr) {
-    const sortedArr = [];
-    let leftIndex = 0;
-    let rightIndex = 0;
+  // function sort(leftArr, rightArr) {
+  //   const sortedArr = [];
+  //   let leftIndex = 0;
+  //   let rightIndex = 0;
 
-    while (leftIndex < left.length && rightIndex < right.length) {
-      if (leftArr[leftIndex] < rightArr[rightIndex]) {
-        sortedArr.push(leftArr[leftIndex]);
-        leftIndex += 1;
-      }
-      if (rightArr[rightIndex] < leftArr[leftIndex]) {
-        sortedArr.push(rightArr[rightIndex]);
-        rightIndex += 1;
-      }
-    }
-    return [
-      ...sortedArr,
-      ...leftArr.slice(leftIndex),
-      ...rightArr.slice(rightIndex),
-    ];
-  }
-  const result = sort(sortByAsc(left), sortByAsc(right));
+  //   while (leftIndex < left.length && rightIndex < right.length) {
+  //     if (leftArr[leftIndex] < rightArr[rightIndex]) {
+  //       sortedArr.push(leftArr[leftIndex]);
+  //       leftIndex += 1;
+  //     }
+  //     if (rightArr[rightIndex] < leftArr[leftIndex]) {
+  //       sortedArr.push(rightArr[rightIndex]);
+  //       rightIndex += 1;
+  //     }
+  //   }
+  //   return [
+  //     ...sortedArr,
+  //     ...leftArr.slice(leftIndex),
+  //     ...rightArr.slice(rightIndex),
+  //   ];
+  // }
+  // const result = sort(sortByAsc(left), sortByAsc(right));
 
-  return result;
+  // return result;
 }
 
 // sortByAsc([-10, 9, 5, -4, -2, 7, 1]);
