@@ -488,6 +488,27 @@ function rotateMatrix(matrix) {
  *  [2, 9, 5, 9]    => [2, 5, 9, 9]
  *  [-2, 9, 5, -3]  => [-3, -2, 5, 9]
  */
+// function sort(leftArr, rightArr) {
+//   const sortedArr = [];
+//   let leftIndex = 0;
+//   let rightIndex = 0;
+
+//   while (leftIndex < leftArr.length && rightIndex < rightArr.length) {
+//     if (leftArr[leftIndex] < rightArr[rightIndex]) {
+//       sortedArr.push(leftArr[leftIndex]);
+//       leftIndex += 1;
+//     }
+//     if (rightArr[rightIndex] < leftArr[leftIndex]) {
+//       sortedArr.push(rightArr[rightIndex]);
+//       rightIndex += 1;
+//     }
+//   }
+//   return [
+//     ...sortedArr,
+//     ...leftArr.slice(leftIndex),
+//     ...rightArr.slice(rightIndex),
+//   ];
+// }
 
 function sortByAsc(/* arr */) {
   throw new Error('Not implemented');
@@ -500,33 +521,12 @@ function sortByAsc(/* arr */) {
   // left = arr.slice(0, arr.length / 2);
   // right = arr.slice(arr.length / 2);
 
-  // function sort(leftArr, rightArr) {
-  //   const sortedArr = [];
-  //   let leftIndex = 0;
-  //   let rightIndex = 0;
-
-  //   while (leftIndex < left.length && rightIndex < right.length) {
-  //     if (leftArr[leftIndex] < rightArr[rightIndex]) {
-  //       sortedArr.push(leftArr[leftIndex]);
-  //       leftIndex += 1;
-  //     }
-  //     if (rightArr[rightIndex] < leftArr[leftIndex]) {
-  //       sortedArr.push(rightArr[rightIndex]);
-  //       rightIndex += 1;
-  //     }
-  //   }
-  //   return [
-  //     ...sortedArr,
-  //     ...leftArr.slice(leftIndex),
-  //     ...rightArr.slice(rightIndex),
-  //   ];
-  // }
   // const result = sort(sortByAsc(left), sortByAsc(right));
 
   // return result;
 }
 
-// sortByAsc([-10, 9, 5, -4, -2, 7, 1]);
+// sortByAsc([-10, 9, 5, -4, -2, 7, 1]); // ?
 
 /**
  * Shuffles characters in a string so that the characters with an odd index are moved to the end of the string at each iteration.
@@ -546,24 +546,68 @@ function sortByAsc(/* arr */) {
  *  'qwerty', 3 => 'qetwry' => 'qtrewy' => 'qrwtey'
  */
 function shuffleChar(str, iterations) {
-  let i = iterations;
+  let m = 0;
+  let n = 0;
   let result = str;
   let temp = '';
+  const repeat = [];
+  const arr = [];
 
-  while (i > 0) {
+  for (let i = 0; i < iterations; i += 1) {
+    if (result === str) {
+      repeat[m] = i;
+      m += 1;
+    }
     for (let j = 0; j < str.length; j += 2) {
       temp += result[j];
     }
     for (let j = 1; j < str.length; j += 2) {
       temp += result[j];
     }
+
     result = temp;
     temp = '';
-    i -= 1;
+    arr[n] = result;
+    n += 1;
+    if (repeat.length === 2) {
+      break;
+    }
   }
+
+  const tail = iterations % repeat[1];
+  if (tail !== 0) {
+    result = arr[tail - 1];
+  }
+
+  if (repeat.length === 1) {
+    result = str;
+    for (let i = 0; i < iterations; i += 1) {
+      for (let j = 0; j < str.length; j += 2) {
+        temp += result[j];
+      }
+      for (let j = 1; j < str.length; j += 2) {
+        temp += result[j];
+      }
+      result = temp;
+      temp = '';
+    }
+  }
+
   return result;
 }
 
+shuffleChar('012345', 8); // ?
+// shuffleChar(
+//   '9187397600645826336523164812517981502384822264086522635648474056558066277071278215463963060044782702',
+//   5
+// ); // ?
+// shuffleChar(
+//   '782125968929965796394260710839560771967549727182885182215301904061798043736630994859235970311239064738899964698202776884985159801309974723431716837267958178653340656052175977064813894836640525153302883069603090132707863305098941628063013676397768368162630284419175547615196233066256160007118729328003197876429556899345807860192402883030252611024890718951310331270681969597197120679209524663899284041650532735450100130630912259476967402888584153104588719041563727916867066088248871490144724770583452170614524225662240706999377965134243217110169341702095818332180323716085485323892690439180313197133674238154878150419986422108987864632393958466188743625700976003079229195824360658594166242937575921754408110437731639082292813972033979795579407937053478146315061729192360324348796291115006215884251116911827687304089243950456331442059357414154054933189730308047644461608697113585312987937961181779787666931958041337821129855121172242028688687054771742902906533204839464078642629672648677582793563056825',
+//   10000
+// ); // ?
+
+// -8129725423314947674563875512711551093343739769487046610415838183144457372577109290209476452454563040
+// +8657193919104319872473476763659171040041489512737425712423317424044247583264768153535555840379596400
 /**
  * Returns the nearest largest integer consisting of the digits of the given positive integer.
  * If there is no such number, it returns the original number.
